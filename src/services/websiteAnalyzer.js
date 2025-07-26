@@ -10,16 +10,18 @@ class WebsiteAnalyzerService {
       const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
       const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
 
-      const analysisPrompt = `Analyze the company at this URL: ${url}
+      const analysisPrompt = `Analyze this company's website to understand their brand and offerings: ${url}
+
+This is the company/brand that will be doing outreach, so analyze THEIR business to help craft better campaign materials that represent their value proposition accurately.
 
 Please provide a brief analysis including:
 1. Company name and industry
-2. Main products/services
-3. Target market/customers
-4. Key value propositions
+2. Main products/services they offer
+3. Their target market/customers
+4. Their key value propositions and differentiators
 5. Company size/stage (startup, enterprise, etc.)
-6. Recent news or achievements
-7. Pain points they might have
+6. Their recent news, achievements, or milestones
+7. Their competitive advantages and unique selling points
 
 Keep your analysis concise and factual. Format as:
 COMPANY_NAME: [name]
@@ -28,8 +30,8 @@ PRODUCTS: [brief description]
 TARGET_MARKET: [who they serve]
 VALUE_PROPS: [key benefits they offer]
 COMPANY_STAGE: [startup/growth/enterprise]
-RECENT_NEWS: [any notable updates]
-PAIN_POINTS: [likely challenges they face]`;
+RECENT_NEWS: [any notable updates or milestones]
+COMPETITIVE_ADVANTAGES: [their unique selling points and differentiators]`;
 
       const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
         method: 'POST',
@@ -75,7 +77,7 @@ PAIN_POINTS: [likely challenges they face]`;
       valueProps: /VALUE_PROPS:\s*(.+)/i,
       companyStage: /COMPANY_STAGE:\s*(.+)/i,
       recentNews: /RECENT_NEWS:\s*(.+)/i,
-      painPoints: /PAIN_POINTS:\s*(.+)/i
+      competitiveAdvantages: /COMPETITIVE_ADVANTAGES:\s*(.+)/i
     };
 
     for (const [key, pattern] of Object.entries(patterns)) {
@@ -101,17 +103,17 @@ PAIN_POINTS: [likely challenges they face]`;
     if (!analysis) return '';
 
     return `
-COMPANY INTELLIGENCE (from website analysis):
-- Company: ${analysis.companyName || 'Unknown'}
-- Industry: ${analysis.industry || 'Unknown'}
-- Products/Services: ${analysis.products || 'Unknown'}
-- Target Market: ${analysis.targetMarket || 'Unknown'}
-- Value Propositions: ${analysis.valueProps || 'Unknown'}
-- Company Stage: ${analysis.companyStage || 'Unknown'}
-- Recent Developments: ${analysis.recentNews || 'None found'}
-- Likely Pain Points: ${analysis.painPoints || 'Unknown'}
+YOUR COMPANY BRAND INTELLIGENCE (from website analysis):
+- Your Company: ${analysis.companyName || 'Unknown'}
+- Your Industry: ${analysis.industry || 'Unknown'}
+- Your Products/Services: ${analysis.products || 'Unknown'}
+- Your Target Market: ${analysis.targetMarket || 'Unknown'}
+- Your Value Propositions: ${analysis.valueProps || 'Unknown'}
+- Your Company Stage: ${analysis.companyStage || 'Unknown'}
+- Your Recent Achievements: ${analysis.recentNews || 'None found'}
+- Your Competitive Advantages: ${analysis.competitiveAdvantages || 'Unknown'}
 
-Use this intelligence to make your campaign materials highly targeted and relevant.`;
+Use this information about the sender's company to craft campaigns that accurately represent their brand, showcase their value proposition, and highlight their competitive advantages when reaching out to prospects.`;
   }
 }
 

@@ -58,7 +58,7 @@ class GeminiApiService {
   buildCampaignPrompt(product, persona, tone, companyAnalysis = null) {
     const companyIntel = companyAnalysis ? websiteAnalyzer.formatAnalysisForPrompt(companyAnalysis) : '';
     
-    return `You are an expert copywriter creating outreach campaign materials for B2B sales.
+    return `You are an expert B2B copywriter specializing in outreach to venture founders, startup operators, and high-growth companies. You understand the fast-paced, ROI-focused mindset of entrepreneurs who are scaling rapidly and need solutions that multiply their impact without adding headcount.
 
 PRODUCT/SERVICE: ${product}
 
@@ -68,16 +68,25 @@ TONE: ${tone}
 
 ${companyIntel}
 
-Generate the following campaign materials:
+CONTEXT: You're reaching out to venture-backed founders, startup operators, or growth-stage companies. These prospects are:
+- Time-constrained and results-focused
+- Looking for force multipliers and competitive advantages
+- Interested in automation, efficiency, and scaling solutions
+- Responsive to data, metrics, and proven ROI
+- Building for rapid growth and need tools that scale with them
+
+Generate campaign materials that speak directly to the venture/startup mindset with language that resonates with founders:
 
 1. THREE different cold email versions (subject line + body):
-   - Version A: Pain point focused
-   - Version B: Social proof focused  
-   - Version C: Value proposition focused
+   - Version A: Growth/scaling pain point focused (mention bottlenecks, operational friction)
+   - Version B: Competitive advantage focused (mention getting ahead, force multipliers, efficiency gains)
+   - Version C: ROI/metrics focused (mention time saved, productivity gains, measurable impact)
    
-2. ONE LinkedIn direct message (150 characters max)
+2. ONE LinkedIn direct message (150 characters max) - use startup/venture language
 
-3. ONE voicemail script (15-20 seconds when spoken)
+3. ONE voicemail script (15-20 seconds) - founder-to-founder tone
+
+Use venture/startup terminology like: scale, force multiplier, operational efficiency, competitive advantage, growth bottlenecks, ROI, automation, streamline workflows, multiply output, eliminate friction.
 
 Format your response EXACTLY like this:
 

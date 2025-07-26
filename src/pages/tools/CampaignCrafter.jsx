@@ -101,8 +101,8 @@ export default function CampaignCrafter() {
 
             <div>
               <label htmlFor="companyUrl" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Company Website (Optional)
-                <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">We'll analyze their site for better targeting</span>
+                Your Company Website (Optional)
+                <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">Add your brand's URL for more personalized campaigns</span>
               </label>
               <input
                 id="companyUrl"
@@ -110,9 +110,12 @@ export default function CampaignCrafter() {
                 type="url"
                 value={formData.companyUrl}
                 onChange={handleInputChange}
-                placeholder="https://company.com"
+                placeholder="https://yourstartup.com"
                 className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent"
               />
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                💡 We'll analyze your website to craft campaigns that better represent your brand and value proposition
+              </p>
             </div>
 
             <div>

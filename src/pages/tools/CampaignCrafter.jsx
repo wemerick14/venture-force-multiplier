@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import geminiApi from '../../services/geminiApi'
 
 export default function CampaignCrafter() {
   const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ export default function CampaignCrafter() {
   })
   const [results, setResults] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
   const handleInputChange = (e) => {
     setFormData({
@@ -19,29 +21,22 @@ export default function CampaignCrafter() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
+    setError(null)
+    setResults(null)
     
-    // Placeholder for API call - Phase 2 will implement actual Gemini Flash integration
-    setTimeout(() => {
-      setResults({
-        emails: [
-          {
-            subject: "Quick question about [Company Name]'s growth",
-            body: "Hi [Name],\n\nI noticed your company has been expanding rapidly in the [industry] space. We've helped similar companies like yours streamline their operations with our automation tools.\n\nWould you be open to a 15-minute call to discuss how we could help [Company Name] scale even more efficiently?\n\nBest regards,\n[Your Name]"
-          },
-          {
-            subject: "Helping [Company Name] multiply productivity",
-            body: "Hello [Name],\n\nYour recent growth caught my attention. At VentureForceMultiplier.ai, we specialize in helping teams like yours become 10x more productive without additional headcount.\n\nInterested in seeing how we could help [Company Name]?\n\n[Your Name]"
-          },
-          {
-            subject: "30-second question for [Company Name]",
-            body: "Hi [Name],\n\nQuick question: What's your biggest operational bottleneck right now?\n\nWe've helped 50+ companies eliminate similar challenges with AI-powered automation.\n\nWorth a brief chat?\n\n[Your Name]"
-          }
-        ],
-        linkedinMessage: "Hi [Name]! Impressed by [Company Name]'s growth in [industry]. We help teams like yours multiply productivity with AI automation. Worth a quick chat about your current challenges?",
-        voicemail: "Hi [Name], this is [Your Name] from VentureForceMultiplier.ai. I see [Company Name] is doing amazing things in [industry]. We specialize in helping growing teams automate their workflows. I'd love to share how we've helped similar companies scale efficiently. Give me a call back at [phone] when you have a moment. Thanks!"
-      })
+    try {
+      const campaignContent = await geminiApi.generateCampaignContent(
+        formData.product,
+        formData.persona,
+        formData.tone
+      )
+      setResults(campaignContent)
+    } catch (err) {
+      setError(err.message || 'Failed to generate campaign content. Please try again.')
+      console.error('Campaign generation error:', err)
+    } finally {
       setLoading(false)
-    }, 2000)
+    }
   }
 
   const isFormValid = formData.product && formData.persona
@@ -117,6 +112,16 @@ export default function CampaignCrafter() {
             >
               {loading ? 'Generating Campaign...' : 'Generate Campaign'}
             </button>
+
+            {error && (
+              <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                <div className="flex items-center">
+                  <div className="text-red-600 dark:text-red-400 text-sm">
+                    <strong>Error:</strong> {error}
+                  </div>
+                </div>
+              </div>
+            )}
           </form>
         </div>
 

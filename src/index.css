@@ -10,14 +10,21 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-medium transition-colors;
+    @apply bg-primary hover:bg-primary/90 active:bg-primary/95 text-white px-6 py-3 rounded-lg font-medium transition-colors min-h-[44px] flex items-center justify-center;
   }
   
   .btn-secondary {
-    @apply bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-50 px-6 py-3 rounded-lg font-medium transition-colors;
+    @apply bg-gray-200 hover:bg-gray-300 active:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 dark:active:bg-gray-500 text-gray-900 dark:text-gray-50 px-6 py-3 rounded-lg font-medium transition-colors min-h-[44px] flex items-center justify-center;
   }
   
   .tool-card {
-    @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:shadow-lg transition-shadow;
+    @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 sm:p-6 hover:shadow-lg transition-shadow;
+  }
+}
+
+/* Mobile touch improvements */
+@media (max-width: 768px) {
+  input, textarea, select, button {
+    font-size: 16px; /* Prevents zoom on iOS */
   }
 }

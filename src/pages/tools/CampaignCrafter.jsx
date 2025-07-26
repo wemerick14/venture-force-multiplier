@@ -54,21 +54,21 @@ export default function CampaignCrafter() {
   const isFormValid = formData.product && formData.persona
 
   return (
-    <div className="py-8">
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+    <div className="py-4 sm:py-8">
+      <div className="mb-6 sm:mb-8 px-4 sm:px-0">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
           Campaign Crafter
         </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-300">
+        <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
           Generate personalized cold emails, LinkedIn messages, and voicemails instantly
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
         {/* Input Form */}
-        <div className="tool-card">
-          <h2 className="text-xl font-semibold mb-6">Campaign Details</h2>
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="tool-card order-1">
+          <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6">Campaign Details</h2>
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
             <div>
               <label htmlFor="product" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Product/Service Description
@@ -80,7 +80,7 @@ export default function CampaignCrafter() {
                 value={formData.product}
                 onChange={handleInputChange}
                 placeholder="Describe what you're selling..."
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent text-sm sm:text-base resize-y min-h-[80px]"
               />
             </div>
 
@@ -95,7 +95,7 @@ export default function CampaignCrafter() {
                 value={formData.persona}
                 onChange={handleInputChange}
                 placeholder="Describe your ideal customer..."
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent text-sm sm:text-base resize-y min-h-[80px]"
               />
             </div>
 
@@ -111,9 +111,9 @@ export default function CampaignCrafter() {
                 value={formData.companyUrl}
                 onChange={handleInputChange}
                 placeholder="https://yourstartup.com"
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent text-sm sm:text-base"
               />
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">
                 💡 We'll analyze your website to craft campaigns that better represent your brand and value proposition
               </p>
             </div>
@@ -127,7 +127,7 @@ export default function CampaignCrafter() {
                 name="tone"
                 value={formData.tone}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent text-sm sm:text-base"
               >
                 <option value="professional">Professional</option>
                 <option value="casual">Casual</option>
@@ -139,7 +139,7 @@ export default function CampaignCrafter() {
             <button
               type="submit"
               disabled={!isFormValid || loading}
-              className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base py-3 sm:py-4"
             >
               {loading ? (loadingMessage || 'Generating Campaign...') : 'Generate Campaign'}
             </button>
@@ -157,18 +157,18 @@ export default function CampaignCrafter() {
         </div>
 
         {/* Results */}
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6 order-2 lg:order-2">
           {results ? (
             <>
               <div className="tool-card">
-                <h3 className="text-lg font-semibold mb-4">Cold Email Options</h3>
-                <div className="space-y-4">
+                <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Cold Email Options</h3>
+                <div className="space-y-3 sm:space-y-4">
                   {results.emails.map((email, index) => (
-                    <div key={index} className="border border-gray-200 dark:border-gray-600 rounded-lg p-4">
-                      <div className="font-medium text-sm text-gray-600 dark:text-gray-400 mb-2">
+                    <div key={index} className="border border-gray-200 dark:border-gray-600 rounded-lg p-3 sm:p-4">
+                      <div className="font-medium text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-2">
                         Subject: {email.subject}
                       </div>
-                      <div className="whitespace-pre-line text-sm">
+                      <div className="whitespace-pre-line text-xs sm:text-sm leading-relaxed">
                         {email.body}
                       </div>
                     </div>
@@ -177,30 +177,30 @@ export default function CampaignCrafter() {
               </div>
 
               <div className="tool-card">
-                <h3 className="text-lg font-semibold mb-4">LinkedIn Message</h3>
-                <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
-                  <div className="text-sm whitespace-pre-line">
+                <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">LinkedIn Message</h3>
+                <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 sm:p-4">
+                  <div className="text-xs sm:text-sm whitespace-pre-line leading-relaxed">
                     {results.linkedinMessage}
                   </div>
                 </div>
               </div>
 
               <div className="tool-card">
-                <h3 className="text-lg font-semibold mb-4">Voicemail Script</h3>
-                <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
-                  <div className="text-sm whitespace-pre-line">
+                <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Voicemail Script</h3>
+                <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 sm:p-4">
+                  <div className="text-xs sm:text-sm whitespace-pre-line leading-relaxed">
                     {results.voicemail}
                   </div>
                 </div>
               </div>
             </>
           ) : (
-            <div className="tool-card text-center py-12">
-              <div className="text-4xl mb-4">⚡</div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+            <div className="tool-card text-center py-8 sm:py-12">
+              <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">⚡</div>
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-2">
                 Ready to Generate
               </h3>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed px-4 sm:px-0">
                 Fill out the form to generate your personalized campaign materials
               </p>
             </div>

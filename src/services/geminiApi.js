@@ -1,13 +1,25 @@
+import websiteAnalyzer from './websiteAnalyzer';
+
 const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
 
 class GeminiApiService {
-  async generateCampaignContent(product, persona, tone) {
+  async generateCampaignContent(product, persona, tone, companyUrl = '') {
     if (!GEMINI_API_KEY) {
       throw new Error('Gemini API key not found. Please check your environment variables.');
     }
 
-    const prompt = this.buildCampaignPrompt(product, persona, tone);
+    // Analyze company website if URL is provided
+    let companyAnalysis = null;
+    if (companyUrl) {
+      try {
+        companyAnalysis = await websiteAnalyzer.analyzeWebsite(companyUrl);
+      } catch (error) {
+        console.warn('Company analysis failed, continuing without website data:', error);
+      }
+    }
+
+    const prompt = this.buildCampaignPrompt(product, persona, tone, companyAnalysis);
 
     try {
       const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
@@ -43,7 +55,9 @@ class GeminiApiService {
     }
   }
 
-  buildCampaignPrompt(product, persona, tone) {
+  buildCampaignPrompt(product, persona, tone, companyAnalysis = null) {
+    const companyIntel = companyAnalysis ? websiteAnalyzer.formatAnalysisForPrompt(companyAnalysis) : '';
+    
     return `You are an expert copywriter creating outreach campaign materials for B2B sales.
 
 PRODUCT/SERVICE: ${product}
@@ -51,6 +65,8 @@ PRODUCT/SERVICE: ${product}
 TARGET PERSONA: ${persona}
 
 TONE: ${tone}
+
+${companyIntel}
 
 Generate the following campaign materials:
 

@@ -5,11 +5,13 @@ export default function CampaignCrafter() {
   const [formData, setFormData] = useState({
     product: '',
     persona: '',
-    tone: 'professional'
+    tone: 'professional',
+    companyUrl: ''
   })
   const [results, setResults] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [loadingMessage, setLoadingMessage] = useState('')
 
   const handleInputChange = (e) => {
     setFormData({
@@ -25,10 +27,19 @@ export default function CampaignCrafter() {
     setResults(null)
     
     try {
+      if (formData.companyUrl) {
+        setLoadingMessage('Analyzing company website...')
+        // Small delay to show the analysis message
+        await new Promise(resolve => setTimeout(resolve, 500))
+      }
+      
+      setLoadingMessage('Generating campaign materials...')
+      
       const campaignContent = await geminiApi.generateCampaignContent(
         formData.product,
         formData.persona,
-        formData.tone
+        formData.tone,
+        formData.companyUrl
       )
       setResults(campaignContent)
     } catch (err) {
@@ -36,6 +47,7 @@ export default function CampaignCrafter() {
       console.error('Campaign generation error:', err)
     } finally {
       setLoading(false)
+      setLoadingMessage('')
     }
   }
 
@@ -88,6 +100,22 @@ export default function CampaignCrafter() {
             </div>
 
             <div>
+              <label htmlFor="companyUrl" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Company Website (Optional)
+                <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">We'll analyze their site for better targeting</span>
+              </label>
+              <input
+                id="companyUrl"
+                name="companyUrl"
+                type="url"
+                value={formData.companyUrl}
+                onChange={handleInputChange}
+                placeholder="https://company.com"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+            </div>
+
+            <div>
               <label htmlFor="tone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Tone
               </label>
@@ -110,7 +138,7 @@ export default function CampaignCrafter() {
               disabled={!isFormValid || loading}
               className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Generating Campaign...' : 'Generate Campaign'}
+              {loading ? (loadingMessage || 'Generating Campaign...') : 'Generate Campaign'}
             </button>
 
             {error && (

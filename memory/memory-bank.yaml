@@ -1,0 +1,107 @@
+# VentureForceMultiplier.ai - Memory Bank
+# This file stores key information, decisions, and context for the project
+
+project:
+  name: "VentureForceMultiplier.ai"
+  description: "AI automation tool studio targeting startup operators and VC teams"
+  status: "planning"
+  created_date: null
+  last_updated: null
+
+# Key project decisions and context
+decisions:
+  tech_stack:
+    frontend: "React + Vite"
+    styling: "Tailwind CSS"
+    routing: "React Router"
+    deployment: "Netlify"
+    backend: "Supabase"
+    ai_api: "Gemini Flash / Claude"
+  
+  design_choices:
+    theme: "Dark theme primary"
+    style: "Clean, dev-studio aesthetic"
+    responsive: true
+    toggle: "Dark/Light mode"
+
+# User/Client information
+client:
+  background: "Baylor University Finance/Marketing/Data Analytics student"
+  experience:
+    - "SAS business development and automation"
+    - "SummerSafe co-founder"
+    - "AI workflow design with n8n, Cline, Power Automate, Claude"
+  target_audience:
+    - "Startup operators"
+    - "SaaS teams" 
+    - "VC-backed founders"
+
+# Project phases and milestones
+phases:
+  phase_1:
+    name: "Foundation & MVP"
+    timeline: "Day 1"
+    status: "planned"
+    key_deliverables:
+      - "Homepage with hero section"
+      - "Tools index page"
+      - "Basic routing"
+      - "Netlify deployment"
+  
+  phase_2:
+    name: "Interactivity & Backend"
+    timeline: "Days 2-7"
+    status: "planned"
+    key_deliverables:
+      - "Campaign Crafter tool functionality"
+      - "API integration"
+      - "Supabase setup"
+      - "Usage tracking"
+  
+  phase_3:
+    name: "Advanced Features"
+    timeline: "Weeks 2-4"
+    status: "planned"
+    key_deliverables:
+      - "User authentication"
+      - "Payment processing"
+      - "Private portal"
+      - "Monetization features"
+
+# Tools to be developed
+tools:
+  campaign_crafter:
+    description: "Generate cold emails, LinkedIn messages, voicemails"
+    inputs: "product, persona, tone"
+    outputs: "3 email versions, LinkedIn DM, 15-second voicemail"
+    status: "planned"
+  
+  leadgen_synth:
+    description: "TBD"
+    status: "planned"
+  
+  process_automator:
+    description: "TBD"
+    status: "planned"
+  
+  ai_feasibility_checker:
+    description: "TBD"
+    status: "planned"
+
+# Important notes and reminders
+notes:
+  - "Site tagline: 'Deploying workflows. Multiplying outcomes.'"
+  - "Focus on modular architecture for easy tool addition"
+  - "Keep initial MVP simple but professional"
+  - "Private portfolio section not linked from main site"
+
+# File structure
+file_structure:
+  docs:
+    - "context.md"
+    - "implementation-plan.md"
+  memory:
+    - "memory-bank.yaml"
+    - "session-log.md"
+  handoff:
+    - "handoff.md"
